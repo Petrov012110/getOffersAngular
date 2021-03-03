@@ -1,18 +1,15 @@
-<div class="container">
-  <header>
+<div class="wrapper-app">
+  <div class="header">
     <app-header-menu></app-header-menu>
-  </header>
-  <div class="main-content">
-    <div class="side-bar">
-      <app-side-bar></app-side-bar>
+  </div>
+  <div class="content">
+    <div class="side-bar__content">
+      <app-items-list></app-items-list>
     </div>
-    <div class="content">
-      <div class="groups">
-        <app-groups></app-groups>
-      </div>
-      <div class="table">
-        <app-table></app-table>
-      </div>
+    <div class="table-list__content">
+      <app-groups></app-groups>
+      <app-table></app-table>
     </div>
   </div>
+  
 </div>

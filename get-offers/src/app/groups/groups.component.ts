@@ -5,11 +5,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.scss']
 })
-export class GroupsComponent implements OnInit {
+export class GroupsComponent  {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
 
 }

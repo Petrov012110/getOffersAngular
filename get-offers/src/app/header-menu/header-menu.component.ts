@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header-menu',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderMenuComponent implements OnInit {
 
+  public showMenu: boolean = false;
+
+  @Output()
+  public toggleShowMenuEvent: EventEmitter<boolean> = new EventEmitter();
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public toggleShowMenu(): void {
+    this.showMenu = !this.showMenu;
+    this.toggleShowMenuEvent.emit(this.showMenu);
   }
 
 }
