@@ -2,14 +2,24 @@
   <div class="header">
     <app-header-menu></app-header-menu>
   </div>
-  <div class="content">
-    <div class="side-bar__content">
-      <app-items-list></app-items-list>
-    </div>
-    <div class="table-list__content">
-      <app-groups></app-groups>
-      <app-table></app-table>
-    </div>
+  <div class="side-bar">
+    <app-items-list></app-items-list>
   </div>
-  
+  <div class="content">
+    <div class="container">
+      <div class="table-list__content">
+        <div class="groups-content">
+          <app-groups></app-groups>
+        </div>
+        <div class="button-content">
+          <app-button-getdata></app-button-getdata>
+        </div>
+        <div class="table-content">
+          <app-table></app-table>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>

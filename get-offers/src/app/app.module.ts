@@ -9,6 +9,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { TableComponent } from './table/table.component';
 import { MaterialModule } from './material/material.module';
 import { ItemsListComponent } from './items-list/items-list.component';
+import { ButtonGetdataComponent } from './button-getdata/button-getdata.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ItemsListComponent } from './items-list/items-list.component';
     GroupsComponent,
     TableComponent,
     ItemsListComponent,
+    ButtonGetdataComponent,
     
   ],
   imports: [

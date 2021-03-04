@@ -35,7 +35,47 @@ const TREE_DATA = {
     'Cook dinner',
     'Read the Material Design spec',
     'Upgrade Application to Angular'
-  ]
+  ],
+  Grocerie: {
+    'Almond Meal flour': null,
+    'Organic eggs': null,
+    'Protein Powder': null,
+    Fruits: {
+      Apple: null,
+      Berries: ['Blueberry', 'Raspberry'],
+      Orange: null
+    }
+  },
+  Groceres: {
+    'Almond Meal flour': null,
+    'Organic eggs': null,
+    'Protein Powder': null,
+    Fruits: {
+      Apple: null,
+      Berries: ['Blueberry', 'Raspberry'],
+      Orange: null
+    }
+  },
+  Grocries: {
+    'Almond Meal flour': null,
+    'Organic eggs': null,
+    'Protein Powder': null,
+    Fruits: {
+      Apple: null,
+      Berries: ['Blueberry', 'Raspberry'],
+      Orange: null
+    }
+  },
+  Grocees: {
+    'Almond Meal flour': null,
+    'Organic eggs': null,
+    'Protein Powder': null,
+    Fruits: {
+      Apple: null,
+      Berries: ['Blueberry', 'Raspberry'],
+      Orange: null
+    }
+  },
 };
 
 /**

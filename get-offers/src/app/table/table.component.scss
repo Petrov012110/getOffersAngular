@@ -1,6 +1,11 @@
 table {
     width: 100%;
+    border-top: 1px solid #e7ebf4;
 }
 .mat-elevation-z8{
     box-shadow: none;
+}
+.mat-header-row{
+    background-color: #fbfcfc;
+    
 }
