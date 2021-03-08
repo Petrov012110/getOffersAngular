@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Injectable } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { BehaviorSubject } from 'rxjs';
+import { ClassificatorType } from './types';
 
 
 export class TodoItemNode {
@@ -18,66 +19,7 @@ export class TodoItemFlatNode {
   expandable!: boolean;
 }
 
-/**
- * The Json object for to-do list data.
- */
-const TREE_DATA = {
-  Groceries: {
-    'Almond Meal flour': null,
-    'Organic eggs': null,
-    'Protein Powder': null,
-    Fruits: {
-      Apple: null,
-      Berries: ['Blueberry', 'Raspberry'],
-      Orange: null
-    }
-  },
-  Reminders: [
-    'Cook dinner',
-    'Read the Material Design spec',
-    'Upgrade Application to Angular'
-  ],
-  Grocerie: {
-    'Almond Meal flour': null,
-    'Organic eggs': null,
-    'Protein Powder': null,
-    Fruits: {
-      Apple: null,
-      Berries: ['Blueberry', 'Raspberry'],
-      Orange: null
-    }
-  },
-  Groceres: {
-    'Almond Meal flour': null,
-    'Organic eggs': null,
-    'Protein Powder': null,
-    Fruits: {
-      Apple: null,
-      Berries: ['Blueberry', 'Raspberry'],
-      Orange: null
-    }
-  },
-  Grocries: {
-    'Almond Meal flour': null,
-    'Organic eggs': null,
-    'Protein Powder': null,
-    Fruits: {
-      Apple: null,
-      Berries: ['Blueberry', 'Raspberry'],
-      Orange: null
-    }
-  },
-  Grocees: {
-    'Almond Meal flour': null,
-    'Organic eggs': null,
-    'Protein Powder': null,
-    Fruits: {
-      Apple: null,
-      Berries: ['Blueberry', 'Raspberry'],
-      Orange: null
-    }
-  },
-};
+
 
 /**
  * Checklist database, it can build a tree structured Json object.
@@ -86,18 +28,24 @@ const TREE_DATA = {
  */
 @Injectable()
 export class ChecklistDatabase {
+  TREE_DATA: { [key: string]: any } = {} = {}
+  
+
   dataChange = new BehaviorSubject<TodoItemNode[]>([]);
 
   get data(): TodoItemNode[] { return this.dataChange.value; }
 
-  constructor() {
+  constructor(private _httpClient: HttpClient) {
+    this.getData();
+    console.log();
+    
     this.initialize();
   }
 
   initialize() {
     // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
     //     file node as children.
-    const data = this.buildFileTree(TREE_DATA, 0);
+    const data = this.buildFileTree(this.TREE_DATA, 0);
 
     // Notify the change.
     this.dataChange.next(data);
@@ -136,6 +84,35 @@ export class ChecklistDatabase {
   updateItem(node: TodoItemNode, name: string) {
     node.item = name;
     this.dataChange.next(this.data);
+  }
+
+  public getData(): any {
+    this._httpClient.get('http://localhost:808/api/classificator').subscribe(vl => {
+      // return TREE_DATA = vl
+      // @ts-ignore
+      console.log(vl);
+      const classificator = vl as ClassificatorType;
+
+      const resData: { [key: string]: any } = {};
+      // @ts-ignore
+
+      classificator.forEach((val) => {
+        if (val.series) {
+          resData[val.name] = {}
+          val.series.forEach((seriesItem) => {
+            if (seriesItem.models) {
+              resData[val.name][seriesItem.name] = {};
+              seriesItem.models.forEach((modelsItem) => {
+                resData[val.name][seriesItem.name][modelsItem.name] = null
+              });
+            } else resData[val.name][seriesItem.name] = null
+          })
+        } else resData[val.name] = null
+      });
+      console.log(resData);
+      return this.TREE_DATA = resData;
+    })
+
   }
 }
 
@@ -300,10 +277,37 @@ export class ItemsListComponent {
     this._database.updateItem(nestedNode!, itemValue);
   }
 
-  public ngOnInit(): void {
-    this._httpClient.get('http://localhost:808/api/classificator').subscribe(vl => {
-      console.log(vl);
-    })
+  // public ngOnInit(): any {
+  //   this._httpClient.get('http://localhost:808/api/classificator').subscribe(vl => {
+  //     // return TREE_DATA = vl
+  //     // @ts-ignore
+  //     console.log(vl);
+  //     const classificator = vl as ClassificatorType;
+
+  //     const resData: { [key: string]: any } = {};
+  //     // @ts-ignore
+
+  //     classificator.forEach((val) => {
+  //       if (val.series) {
+  //         resData[val.name] = {}
+  //         val.series.forEach((seriesItem) => {
+  //           if (seriesItem.models) {
+  //             resData[val.name][seriesItem.name] = {};
+  //             seriesItem.models.forEach((modelsItem) => {
+  //               resData[val.name][seriesItem.name][modelsItem.name] = null
+  //             });
+  //           } else resData[val.name][seriesItem.name] = null
+  //         })
+  //       } else resData[val.name] = null
+  //     });
+  //     console.log(resData);
+  //     TREE_DATA = resData;
+  //   })
+
+  // }
+
+  ngDoCheck(){
+    // TREE_DATA
   }
 
 }
