@@ -3,7 +3,8 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { HttpClient } from '@angular/common/http';
 import { Component, Injectable } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, interval, of } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { ClassificatorType } from './types';
 
 
@@ -19,7 +20,23 @@ export class TodoItemFlatNode {
   expandable!: boolean;
 }
 
-
+const TREE_DATA = {
+  Groceries: {
+    'Almond Meal flour': null,
+    'Organic eggs': null,
+    'Protein Powder': null,
+    Fruits: {
+      Apple: null,
+      Berries: ['Blueberry', 'Raspberry'],
+      Orange: null
+    }
+  },
+  Reminders: [
+    'Cook dinner',
+    'Read the Material Design spec',
+    'Upgrade Application to Angular'
+  ]
+};
 
 /**
  * Checklist database, it can build a tree structured Json object.
@@ -28,7 +45,7 @@ export class TodoItemFlatNode {
  */
 @Injectable()
 export class ChecklistDatabase {
-  TREE_DATA: { [key: string]: any } = {} = {}
+  // TREE_DATA: { [key: string]: any } = {} = {}
   
 
   dataChange = new BehaviorSubject<TodoItemNode[]>([]);
@@ -36,19 +53,46 @@ export class ChecklistDatabase {
   get data(): TodoItemNode[] { return this.dataChange.value; }
 
   constructor(private _httpClient: HttpClient) {
-    this.getData();
-    console.log();
-    
     this.initialize();
   }
 
   initialize() {
+    let data;
+    this.getData().subscribe( vl => {
+      // return TREE_DATA = vl
+      // @ts-ignore
+      console.log(vl);
+      const classificator = vl as ClassificatorType;
+
+      const resData: { [key: string]: any } = {};
+      // @ts-ignore
+
+      classificator.forEach((val) => {
+        if (val.series) {
+          resData[val.name] = {}
+          val.series.forEach((seriesItem) => {
+            if (seriesItem.modesl) {
+              resData[val.name][seriesItem.name] = {};
+              seriesItem.modesl.forEach((modelsItem) => {
+                resData[val.name][seriesItem.name][modelsItem.name] = null
+              });
+            } else resData[val.name][seriesItem.name] = null
+          })
+        } else resData[val.name] = null
+      });
+      console.log(resData);
+      
+      data = this.buildFileTree(resData, 0)
+      this.dataChange.next(data);
+      // return resData;
+    })
+    // const datata = ;
     // Build the tree nodes from Json object. The result is a list of `TodoItemNode` with nested
     //     file node as children.
-    const data = this.buildFileTree(this.TREE_DATA, 0);
+    
 
     // Notify the change.
-    this.dataChange.next(data);
+    
   }
 
   /**
@@ -86,32 +130,8 @@ export class ChecklistDatabase {
     this.dataChange.next(this.data);
   }
 
-  public getData(): any {
-    this._httpClient.get('http://localhost:808/api/classificator').subscribe(vl => {
-      // return TREE_DATA = vl
-      // @ts-ignore
-      console.log(vl);
-      const classificator = vl as ClassificatorType;
-
-      const resData: { [key: string]: any } = {};
-      // @ts-ignore
-
-      classificator.forEach((val) => {
-        if (val.series) {
-          resData[val.name] = {}
-          val.series.forEach((seriesItem) => {
-            if (seriesItem.models) {
-              resData[val.name][seriesItem.name] = {};
-              seriesItem.models.forEach((modelsItem) => {
-                resData[val.name][seriesItem.name][modelsItem.name] = null
-              });
-            } else resData[val.name][seriesItem.name] = null
-          })
-        } else resData[val.name] = null
-      });
-      console.log(resData);
-      return this.TREE_DATA = resData;
-    })
+  public getData() {
+    return this._httpClient.get('http://localhost:808/api/classificator');
 
   }
 }

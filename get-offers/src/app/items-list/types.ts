@@ -6,7 +6,7 @@ export type ModelType = {
 export type SeriesType = {
     name: string;
     // regexp: string;
-    models?: ModelType[];
+    modesl?: ModelType[];
 };
 
 export type BrandType = {
