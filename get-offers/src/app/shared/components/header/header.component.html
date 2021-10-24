@@ -1,0 +1,16 @@
+<div class="header">
+    <nav class="navbar">
+        <a routerLink="/">Landing</a>
+        <ul>
+            <li routerLinkActive="active">
+                <a [routerLink]="['/user', 'search']">Поиск</a>
+            </li>
+            <li routerLinkActive="active">
+                <a [routerLink]="['/user', 'favorites-item']">Избранное</a>
+            </li>
+            <li>
+                <a href="#" (click)="logout($event)">Выйти</a>
+            </li>
+        </ul>
+    </nav>
+</div>
