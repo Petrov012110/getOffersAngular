@@ -45,7 +45,7 @@
         <button 
             type="submit" 
             class="btn-enter"
-            [disabled]="loginForm.invalid" 
+            [disabled]="loginForm.invalid || submitted" 
         >
             <span>Войти</span>
         </button>

@@ -1,1 +1,8 @@
-<app-login-form></app-login-form>
+<div *ngIf="flagForm">
+    <app-login-form></app-login-form>
+</div>
+<div *ngIf="!flagForm">
+    <app-registration-form></app-registration-form>
+</div>
+<button class="btn-enter-registration" (click)="changeForm()">Регистрация/Войти</button>
+

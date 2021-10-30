@@ -8,7 +8,7 @@ export class FbAuthResponseModel {
     public kind!: string;
     public localId!: string;
     public registered!: string;
-    public expiresIn!: string;
+    public expiresIn!: Date;
 
     constructor(data: IFbAuthResponse) {
         if (data) {
@@ -18,7 +18,7 @@ export class FbAuthResponseModel {
             this.kind = data.kind;
             this.localId = data.localId;
             this.registered = data.registered;
-            this.expiresIn = data.expiresIn;
+            this.expiresIn = new Date(new Date().getTime() + +data.expiresIn * 1000);
         }
     }
 }

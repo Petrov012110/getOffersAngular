@@ -1,15 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'app-login-page',
     templateUrl: './login-page.component.html',
     styleUrls: ['./styles/login-page.component.scss']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent {
+
+    public flagForm = true;
 
     constructor() { }
 
-    ngOnInit(): void {
+    public changeForm(): void {
+        this.flagForm = !this.flagForm;   
     }
 
 }

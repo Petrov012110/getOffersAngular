@@ -9,6 +9,7 @@ import { MainLayoutComponent } from './shared/components/main-layout/main-layout
 import { MainPageComponent } from './main-page/main-page.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { SharedModule } from './shared/shared.module';
+import { UserModule } from './user/user.module';
 
 
 const imports: any[] = [
@@ -16,7 +17,8 @@ const imports: any[] = [
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    UserModule
 ];
 
 const declarations: any[] = [

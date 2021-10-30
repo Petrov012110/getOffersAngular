@@ -12,6 +12,8 @@ import { LoginFormComponent } from './shared/components/login-form/login-form.co
 import { AuthService } from "./shared/services/auth.service";
 import { SharedModule } from "../shared/shared.module";
 import { LocalStorageService } from "./shared/services/local-storage.service";
+import { AuthGuardService } from "./shared/services/auth.guard.service";
+import { RegistrationFormComponent } from './shared/components/registration-form/registration-form.component';
 
 const imports: any[] = [
     CommonModule,
@@ -28,13 +30,13 @@ const imports: any[] = [
                     path: 'login', component: LoginPageComponent
                 },
                 {
-                    path: 'item/:id', component: ItemPageComponent
+                    path: 'item/:id', component: ItemPageComponent, canActivate: [AuthGuardService]
                 },
                 {
-                    path: 'search', component: SearchPageComponent
+                    path: 'search', component: SearchPageComponent, canActivate: [AuthGuardService]
                 },
                 {
-                    path: 'favorites-item', component: FavoritesItemPageComponent
+                    path: 'favorites-item', component: FavoritesItemPageComponent, canActivate: [AuthGuardService]
                 }
             ]
         }
@@ -56,12 +58,14 @@ const exports: any[] = [
 
 const providers: any[] = [
     AuthService,
-    LocalStorageService
+    LocalStorageService,
+    AuthGuardService
 ];
 
 @NgModule({
     declarations: [
-        ...declarations
+        ...declarations,
+        RegistrationFormComponent
     ],
     imports: [
         ...imports
