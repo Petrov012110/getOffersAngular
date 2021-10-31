@@ -14,12 +14,20 @@ import { SharedModule } from "../shared/shared.module";
 import { LocalStorageService } from "./shared/services/local-storage.service";
 import { AuthGuardService } from "./shared/services/auth.guard.service";
 import { RegistrationFormComponent } from './shared/components/registration-form/registration-form.component';
+import { environment } from "src/environments/environment";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { AngularFireModule } from '@angular/fire/compat';
+import { list } from '@angular/fire/database';
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 
 const imports: any[] = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
     RouterModule.forChild([
         {
             path: '', component: UserLayoutComponent, children: [

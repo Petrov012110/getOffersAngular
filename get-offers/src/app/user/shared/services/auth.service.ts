@@ -42,7 +42,7 @@ export class AuthService implements OnInit, OnDestroy {
 
     public login(user: UserModel): Observable<any> {
         user.returnSecureToken = true;
-        return this._http.post<IFbAuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
+        return this._http.post<IFbAuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebase.apiKey}`, user)
             .pipe(
                 map((response: IFbAuthResponse) => new FbAuthResponseModel(response)),
                 tap(this.setToken),
@@ -52,7 +52,7 @@ export class AuthService implements OnInit, OnDestroy {
 
     public registration(user: UserModel): Observable<any> {
         user.returnSecureToken = true;
-        return this._http.post<IFbRegistrationResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`, user)
+        return this._http.post<IFbRegistrationResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebase.apiKey}`, user)
             .pipe(
                 map((response: IFbRegistrationResponse) => new FbRegistrationResponse(response)),
                 tap(this.setToken),

@@ -41,22 +41,22 @@ export class RegistrationFormComponent implements OnInit {
 
     public submit(): void {
 
-        if (this.registrationForm.invalid) {
-            return;
-        }
+        // if (this.registrationForm.invalid) {
+        //     return;
+        // }
 
-        this.submitted = true;
+        // this.submitted = true;
 
-        const user = new UserModel(this.registrationForm.value.emailControl, this.registrationForm.value.passwordControl);
+        // const user = new UserModel(this.registrationForm.value.emailControl, this.registrationForm.value.passwordControl);
 
-        this._auth.registration(user).subscribe(() => {
-            this.registrationForm.reset();
-            this._router.navigate(['/user', 'search']);
-        });
+        // this._auth.registration(user).subscribe(() => {
+        //     this.registrationForm.reset();
+        //     this._router.navigate(['/user', 'search']);
+        // });
 
-        setTimeout(() => {
-            this.submitted = false;
-        }, 4000);
+        // setTimeout(() => {
+        //     this.submitted = false;
+        // }, 4000);
     }
 
 }

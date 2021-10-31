@@ -34,22 +34,22 @@ export class LoginFormComponent implements OnInit {
 
     public submit(): void {
 
-        if (this.loginForm.invalid) {
-            return;
-        }
+        // if (this.loginForm.invalid) {
+        //     return;
+        // }
 
-        this.submitted = true;
+        // this.submitted = true;
 
-        const user = new UserModel(this.loginForm.value.emailControl, this.loginForm.value.passwordControl);
+        // const user = new UserModel(this.loginForm.value.emailControl, this.loginForm.value.passwordControl);
 
-        this._auth.login(user).subscribe(() => {
-            this.loginForm.reset();
-            this._router.navigate(['/user', 'search']);
-        });
+        // this._auth.login(user).subscribe(() => {
+        //     this.loginForm.reset();
+        //     this._router.navigate(['/user', 'search']);
+        // });
 
-        setTimeout(() => {
-            this.submitted = false;
-        }, 4000);
+        // setTimeout(() => {
+        //     this.submitted = false;
+        // }, 4000);
     }
 
 }
