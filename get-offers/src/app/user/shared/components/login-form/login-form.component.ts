@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserModel } from '../../models/user/user.model';
+import { AuthFirebaseService } from '../../services/auth-firebase.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginFormComponent implements OnInit {
     public submitted = false;
 
     constructor(
+        public authFb: AuthFirebaseService,
         private _auth: AuthService,
         private _router: Router,
     ) {

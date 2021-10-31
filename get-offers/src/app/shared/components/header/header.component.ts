@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthFirebaseService } from 'src/app/user/shared/services/auth-firebase.service';
 import { AuthService } from 'src/app/user/shared/services/auth.service';
 
 @Component({
@@ -10,8 +11,8 @@ import { AuthService } from 'src/app/user/shared/services/auth.service';
 export class HeaderComponent implements OnInit {
 
     constructor(
+        public authFb: AuthFirebaseService,
         private _router: Router,
-        private _auth: AuthService
         ) { }
 
     public ngOnInit(): void {
@@ -19,7 +20,7 @@ export class HeaderComponent implements OnInit {
 
     public logout(event: Event): void {
         event.preventDefault();
-        this._auth.logout();
+        this.authFb.SignOut();
         this._router.navigate(['/user', 'login']);
     }
 

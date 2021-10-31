@@ -1,14 +1,16 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy, OnInit } from "@angular/core";
 
-import { Observable, Subject } from "rxjs";
+
 import { environment } from "src/environments/environment";
 import { UserModel } from "../models/user/user.model";
-import { map, takeUntil, tap } from "rxjs/operators";
+
 import { IFbAuthResponse as IFbAuthResponse } from "../models/fire-base/fire-base.response-model.interface";
 import { FbAuthResponseModel } from "../models/fire-base/firebase-auth.response-model";
 import { FbRegistrationResponse } from "../models/fire-base/firebase-registration.response-model";
 import { IFbRegistrationResponse } from "../models/fire-base/fire-base.response-registration-model.interface";
+import { Observable, Subject } from "rxjs";
+import { map, takeUntil, tap } from "rxjs/operators";
 
 @Injectable()
 export class AuthService implements OnInit, OnDestroy {

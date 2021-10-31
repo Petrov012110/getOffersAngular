@@ -15,7 +15,7 @@ export const environment: IEnviroment = {
         appId: "1:236882893333:web:8354b0e0628cc531dbcc1c",
         measurementId: "G-51V3CS4XW0"
     }
-  };
+};
 
 /*
  * For easier debugging in development mode, you can import the following file
@@ -24,4 +24,4 @@ export const environment: IEnviroment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

@@ -14,10 +14,15 @@ import { SharedModule } from "../shared/shared.module";
 import { LocalStorageService } from "./shared/services/local-storage.service";
 import { AuthGuardService } from "./shared/services/auth.guard.service";
 import { RegistrationFormComponent } from './shared/components/registration-form/registration-form.component';
+
+
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { enableIndexedDbPersistence, getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 import { environment } from "src/environments/environment";
+import { AuthFirebaseService } from "./shared/services/auth-firebase.service";
+import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
-import { AngularFireModule } from '@angular/fire/compat';
-import { list } from '@angular/fire/database';
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 
 const imports: any[] = [
@@ -57,7 +62,8 @@ const declarations: any[] = [
     SearchPageComponent,
     ItemPageComponent,
     FavoritesItemPageComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    RegistrationFormComponent
 ];
 
 const exports: any[] = [
@@ -67,13 +73,13 @@ const exports: any[] = [
 const providers: any[] = [
     AuthService,
     LocalStorageService,
-    AuthGuardService
+    AuthGuardService,
+    AuthFirebaseService
 ];
 
 @NgModule({
     declarations: [
-        ...declarations,
-        RegistrationFormComponent
+        ...declarations
     ],
     imports: [
         ...imports
