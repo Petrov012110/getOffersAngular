@@ -1,4 +1,14 @@
-export interface Enviroment {
+export interface IEnviroment {
+    production: boolean;
+    firebase: IFirebase;
+}
+
+interface IFirebase {
     "apiKey": string;
-    "production": boolean;
+    "authDomain": string,
+    "projectId": string,
+    "storageBucket": string,
+    "messagingSenderId": string,
+    "appId": string,
+    "measurementId": string
 }

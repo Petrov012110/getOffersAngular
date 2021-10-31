@@ -5,7 +5,7 @@
             [ngClass]="{invalid: registrationForm.get('emailControl')?.touched && registrationForm.get('emailControl')?.invalid}"
             class="form-control"
         >
-            <input type="email" formControlName="emailControl">
+            <input type="email" placeholder="Email" formControlName="emailControl" #userEmail>
             <div
                 *ngIf="registrationForm.get('emailControl')?.touched && registrationForm.get('emailControl')?.invalid"
                 class="validation"
@@ -25,7 +25,7 @@
             [ngClass]="{invalid: registrationForm.get('passwordControl')?.touched && registrationForm.get('passwordControl')?.invalid}" 
             class="form-control"
         >
-            <input type="password" formControlName="passwordControl">
+            <input type="password" placeholder="Password" formControlName="passwordControl" #userPwd>
             <div 
                 *ngIf="registrationForm.get('passwordControl')?.touched && registrationForm.get('passwordControl')?.invalid"
                 class="validation"
@@ -47,7 +47,7 @@
             [ngClass]="{invalid: registrationForm.get('confirmPasswordControl')?.touched && registrationForm.get('confirmPasswordControl')?.invalid}" 
             class="form-control"
         >
-            <input type="password" formControlName="confirmPasswordControl">
+            <input type="password" placeholder="Password" formControlName="confirmPasswordControl" >
             <div 
                 *ngIf="registrationForm.get('confirmPasswordControl')?.touched && registrationForm.get('confirmPasswordControl')?.invalid"
                 class="validation"
@@ -62,13 +62,15 @@
         </div>
     </div>
     <div class="form-block">
-        <button 
-            type="submit" 
-            class="btn-enter"
-            [disabled]="registrationForm.invalid || submitted" 
+        <input [disabled]="registrationForm.invalid || submitted" 
+                type="button" 
+                class="btn btnPrimary" 
+                value="Зарегистрироваться" 
+                (click)="authFb.SignUp(userEmail.value, userPwd.value)"
         >
-            <span>Зарегистрироваться</span>
-        </button>
     </div>
 
 </form>
+
+
+
