@@ -10,7 +10,10 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from 'src/environments/environment';
 
 const imports: any[] = [
     BrowserModule,
@@ -18,7 +21,10 @@ const imports: any[] = [
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
-    UserModule
+    UserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
 ];
 
 const declarations: any[] = [

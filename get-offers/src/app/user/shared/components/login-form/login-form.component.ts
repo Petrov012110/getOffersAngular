@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserModel } from '../../models/user/user.model';
+import { AuthFirebaseService } from '../../services/auth-firebase.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginFormComponent implements OnInit {
     public submitted = false;
 
     constructor(
+        public _authFb: AuthFirebaseService,
         private _auth: AuthService,
         private _router: Router,
     ) {
@@ -34,22 +36,22 @@ export class LoginFormComponent implements OnInit {
 
     public submit(): void {
 
-        if (this.loginForm.invalid) {
-            return;
-        }
+        // if (this.loginForm.invalid) {
+        //     return;
+        // }
 
-        this.submitted = true;
+        // this.submitted = true;
 
-        const user = new UserModel(this.loginForm.value.emailControl, this.loginForm.value.passwordControl);
+        // const user = new UserModel(this.loginForm.value.emailControl, this.loginForm.value.passwordControl);
 
-        this._auth.login(user).subscribe(() => {
-            this.loginForm.reset();
-            this._router.navigate(['/user', 'search']);
-        });
+        // this._auth.login(user).subscribe(() => {
+        //     this.loginForm.reset();
+        //     this._router.navigate(['/user', 'search']);
+        // });
 
-        setTimeout(() => {
-            this.submitted = false;
-        }, 4000);
+        // setTimeout(() => {
+        //     this.submitted = false;
+        // }, 4000);
     }
 
 }

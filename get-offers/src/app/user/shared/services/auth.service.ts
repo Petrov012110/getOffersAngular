@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnDestroy, OnInit } from "@angular/core";
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 import { Observable, Subject } from "rxjs";
 import { environment } from "src/environments/environment";
@@ -9,6 +10,7 @@ import { IFbAuthResponse as IFbAuthResponse } from "../models/fire-base/fire-bas
 import { FbAuthResponseModel } from "../models/fire-base/firebase-auth.response-model";
 import { FbRegistrationResponse } from "../models/fire-base/firebase-registration.response-model";
 import { IFbRegistrationResponse } from "../models/fire-base/fire-base.response-registration-model.interface";
+import firebase from 'firebase/compat/app';
 
 @Injectable()
 export class AuthService implements OnInit, OnDestroy {
@@ -17,6 +19,7 @@ export class AuthService implements OnInit, OnDestroy {
 
     constructor(
         private _http: HttpClient,
+        private afAuth: AngularFireAuth,
     ) {
 
     }
@@ -31,7 +34,7 @@ export class AuthService implements OnInit, OnDestroy {
     }
 
     public get token(): string | null {
-        const expDate = new Date(localStorage.getItem('fb-token-expdate') as string);
+        const expDate = new Date(localStorage.getItem('fb-token-expdate') || '{}');
 
         if (new Date() > expDate) {
             this.logout();
@@ -42,7 +45,7 @@ export class AuthService implements OnInit, OnDestroy {
 
     public login(user: UserModel): Observable<any> {
         user.returnSecureToken = true;
-        return this._http.post<IFbAuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`, user)
+        return this._http.post<IFbAuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebase.apiKey}`, user)
             .pipe(
                 map((response: IFbAuthResponse) => new FbAuthResponseModel(response)),
                 tap(this.setToken),
@@ -52,7 +55,7 @@ export class AuthService implements OnInit, OnDestroy {
 
     public registration(user: UserModel): Observable<any> {
         user.returnSecureToken = true;
-        return this._http.post<IFbRegistrationResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.apiKey}`, user)
+        return this._http.post<IFbRegistrationResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebase.apiKey}`, user)
             .pipe(
                 map((response: IFbRegistrationResponse) => new FbRegistrationResponse(response)),
                 tap(this.setToken),
