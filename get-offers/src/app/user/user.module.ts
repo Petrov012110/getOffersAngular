@@ -24,6 +24,19 @@ import { AuthFirebaseService } from "./shared/services/auth-firebase.service";
 import { AngularFireModule } from "@angular/fire/compat";
 import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
+import { SingUpPageComponent } from './sing-up-page/sing-up-page.component';
+import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
+import { ResetPasswordFormComponent } from "./shared/components/reset-password-form/reset-password-form.component";
+import { SourceService } from "./shared/services/source.service";
+import { ItemsTreeComponent } from './shared/components/items-tree/items-tree.component';
+import { MatTreeModule } from '@angular/material/tree';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { ManagerService } from "./shared/services/manager.service";
+import { CacheService } from "./shared/services/cache.service";
+import { BannerComponent } from "../shared/components/banner/banner.component";
+import { ParseTableComponent } from './shared/components/parse-table/parse-table.component';
 
 const imports: any[] = [
     CommonModule,
@@ -33,6 +46,10 @@ const imports: any[] = [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    MatTreeModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatIconModule,
     RouterModule.forChild([
         {
             path: '', component: UserLayoutComponent, children: [
@@ -40,7 +57,13 @@ const imports: any[] = [
                     path: '', redirectTo: '/user/login', pathMatch: 'full'
                 },
                 {
-                    path: 'login', component: LoginPageComponent
+                    path: 'sign-in', component: LoginPageComponent
+                },
+                {
+                    path: 'sign-up', component: SingUpPageComponent
+                },
+                {
+                    path: 'reset-password', component: ResetPasswordPageComponent
                 },
                 {
                     path: 'item/:id', component: ItemPageComponent, canActivate: [AuthGuardService]
@@ -63,7 +86,11 @@ const declarations: any[] = [
     ItemPageComponent,
     FavoritesItemPageComponent,
     LoginFormComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    ResetPasswordFormComponent,
+    SingUpPageComponent,
+    ResetPasswordPageComponent,
+    ItemsTreeComponent,
 ];
 
 const exports: any[] = [
@@ -74,12 +101,16 @@ const providers: any[] = [
     AuthService,
     LocalStorageService,
     AuthGuardService,
-    AuthFirebaseService
+    AuthFirebaseService,
+    SourceService,
+    ManagerService,
+    CacheService
 ];
 
 @NgModule({
     declarations: [
-        ...declarations
+        ...declarations,
+        ParseTableComponent
     ],
     imports: [
         ...imports

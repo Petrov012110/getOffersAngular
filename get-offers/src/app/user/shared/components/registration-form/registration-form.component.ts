@@ -16,7 +16,7 @@ export class RegistrationFormComponent implements OnInit {
     public submitted = false;
 
     constructor(
-        public authFb: AuthFirebaseService,
+        private _authFb: AuthFirebaseService,
         private _auth: AuthService,
         private _router: Router,
     ) {
@@ -41,24 +41,23 @@ export class RegistrationFormComponent implements OnInit {
         return pass === confirmPass ? null : { notSame: true }
     }
 
-    public submit(): void {
+    public submit(email: string, password: string): void {
 
-        // if (this.registrationForm.invalid) {
-        //     return;
-        // }
+        if (this.registrationForm.invalid) {
+            return;
+        }
 
-        // this.submitted = true;
+        this.submitted = true;
 
-        // const user = new UserModel(this.registrationForm.value.emailControl, this.registrationForm.value.passwordControl);
+        this._authFb.SignUp(email, password);
 
-        // this._auth.registration(user).subscribe(() => {
-        //     this.registrationForm.reset();
-        //     this._router.navigate(['/user', 'search']);
-        // });
+        this.registrationForm.reset();
+        this._router.navigate(['/user', 'sign-in']);
 
-        // setTimeout(() => {
-        //     this.submitted = false;
-        // }, 4000);
+
+        setTimeout(() => {
+            this.submitted = false;
+        }, 4000);
     }
 
 }

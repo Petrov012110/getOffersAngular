@@ -10,6 +10,9 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { BannerComponent } from './shared/components/banner/banner.component';
 
 
 const imports: any[] = [
@@ -18,7 +21,8 @@ const imports: any[] = [
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule,
-    UserModule
+    UserModule,
+
 ];
 
 const declarations: any[] = [
@@ -26,6 +30,7 @@ const declarations: any[] = [
     MainLayoutComponent,
     MainPageComponent,
     HeaderComponent,
+    BannerComponent
 ];
 
 @NgModule({
