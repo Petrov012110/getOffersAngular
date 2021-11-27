@@ -2,8 +2,6 @@ import { Injectable, NgZone } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { UserModel } from "../models/user/user.model";
-import { Firestore } from "firebase/firestore";
 
 export interface User {
     uid: string;
@@ -30,13 +28,12 @@ export class AuthFirebaseService {
             if (user) {
                 this.userData = user;
                 localStorage.setItem('user', JSON.stringify(this.userData));
-                JSON.parse(localStorage.getItem('user') as string);
-                    this.router.navigate(['/user', 'search']);
+                // JSON.parse(localStorage.getItem('user') as string);
+                this.router.navigate(['/user', 'search']);
 
             } else {
                 localStorage.removeItem('user');
-                JSON.parse(localStorage.getItem('user') as string);
-                    // this.router.navigate(['/user', 'search']);
+                // JSON.parse(localStorage.getItem('user') as string);
 
             }
         })
@@ -46,17 +43,25 @@ export class AuthFirebaseService {
     public SignIn(email: string, password: string): Promise<void> {
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then((result: any) => {
-                // this.ngZone.run(() => {
-                //     this.router.navigate(['/user', 'search']);
-                // });
                 this.SetUserData(result.user);
             }).catch((error) => {
                 window.alert(error.message)
             })
     }
 
+    public async checkEmailVerification(): Promise<void> {
+        let user = await this.afAuth.currentUser;
+        await user?.reload();
+        if (user?.emailVerified) {
+            const userNotVeryfiedEmail = JSON.parse(localStorage.getItem('user') as string);
+            userNotVeryfiedEmail.emailVerified = true;
+            localStorage.setItem('user', JSON.stringify(userNotVeryfiedEmail));
+        }
+    }    
+
     // Sign up with email/password
     public SignUp(email: string, password: string): Promise<void> {
+        const userRealMail = email;
         return this.afAuth.createUserWithEmailAndPassword(email, password)
             .then((result: any) => {
                 /* Call the SendVerificaitonMail() function when new user sign 
@@ -70,7 +75,8 @@ export class AuthFirebaseService {
 
     // Send email verfificaiton when new user sign up
     public SendVerificationMail(): Promise<void> {
-        return this.afAuth.currentUser.then(u => u?.sendEmailVerification())
+        return this.afAuth.currentUser
+            .then(u => u?.sendEmailVerification())
             .then(() => {
                 // this.router.navigate(['verify-email']);
                 alert("Отправили mail");
@@ -83,7 +89,7 @@ export class AuthFirebaseService {
             .then(() => {
                 window.alert('Password reset email sent, check your inbox.');
             }).catch((error) => {
-                window.alert(error)
+                window.alert(error);
             })
     }
 
@@ -107,7 +113,7 @@ export class AuthFirebaseService {
                 })
                 this.SetUserData(result.user);
             }).catch((error) => {
-                window.alert(error)
+                window.alert(error);
             })
     }
 
@@ -132,6 +138,7 @@ export class AuthFirebaseService {
     public SignOut(): Promise<void> {
         return this.afAuth.signOut().then(() => {
             localStorage.removeItem('user');
+            this.router.navigate(['/user', 'sign-in']);
         })
     }
 }

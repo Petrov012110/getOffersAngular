@@ -1,8 +1,8 @@
-<div *ngIf="flagForm">
-    <app-login-form></app-login-form>
-</div>
-<div *ngIf="!flagForm">
-    <app-registration-form></app-registration-form>
-</div>
-<button class="btn-enter-registration" (click)="changeForm()">Регистрация/Войти</button>
+<app-login-form></app-login-form>
 
+<div class="redirectToLogin">
+    <span>Go back to?<span class="redirect" routerLink="/sign-up"> Sign up</span></span>
+</div>
+<div class="redirectToLogin">
+    <span>Forgot password?<span class="redirect" routerLink="/reset-password"> Reset password</span></span>
+</div>

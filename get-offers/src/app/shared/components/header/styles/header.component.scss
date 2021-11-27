@@ -1,11 +1,55 @@
-.navbar{
+.header-wrapp {
+  justify-content: space-between;
+  padding: 0;
+}
+
+.header-btn {
+  display: none;
+}
+
+.header-logo {
+  a {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    ul{
-        display: flex;
+
+    div {
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18x;
+      line-height: 110%;
+      letter-spacing: -0.01em;
+      color: #181A27;
     }
-    li{
-        margin-right: 20px;
+
+    img {
+      width: 25px;
+      margin-right: 7px;
     }
+
+  }
+}
+
+.header-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  ul {
+    display: flex;
+  }
+
+  li {
+    margin-right: 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    a {
+ 
+      display: flex;
+      align-items: center;
+    }
+  }
 }

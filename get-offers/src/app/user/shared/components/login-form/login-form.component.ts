@@ -34,24 +34,28 @@ export class LoginFormComponent implements OnInit {
         
     }
 
-    public submit(): void {
 
-        // if (this.loginForm.invalid) {
-        //     return;
-        // }
 
-        // this.submitted = true;
+    public async submit(email: string, password: string): Promise<void> {
+        if (this.loginForm.invalid) {
+            return;
+        }
+        
+        this.submitted = true;
+        
+        await this.login(email, password);
+        this.loginForm.reset();
+        this._router.navigate(['/user', 'search']);
 
-        // const user = new UserModel(this.loginForm.value.emailControl, this.loginForm.value.passwordControl);
 
-        // this._auth.login(user).subscribe(() => {
-        //     this.loginForm.reset();
-        //     this._router.navigate(['/user', 'search']);
-        // });
+        setTimeout(() => {
+            this.submitted = false;
+        }, 4000);
+    }
 
-        // setTimeout(() => {
-        //     this.submitted = false;
-        // }, 4000);
+    public async login(email: string, password: string) {
+        await this.authFb.checkEmailVerification();
+        await this.authFb.SignIn(email, password)
     }
 
 }

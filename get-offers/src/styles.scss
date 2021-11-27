@@ -1,13 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-html{
-    box-sizing: border-box;
+
+$gray: #F6F8F9;
+$dark-blue: #181A27;
+
+html,
+body {
+  height: 100%;
 }
-*, *::before, *::after {
-    box-sizing: inherit;
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-body{
-    background-color: #f6f8f9;
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #f6f8f9;
+}
+
+a {
+  color: var(--primary-color);
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    color: #666;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+.btn-header {
+    border-radius: 69px;
 }

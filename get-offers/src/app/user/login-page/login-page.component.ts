@@ -7,12 +7,10 @@ import { Component, OnInit, Output } from '@angular/core';
 })
 export class LoginPageComponent {
 
-    public flagForm = true;
 
     constructor() { }
 
-    public changeForm(): void {
-        this.flagForm = !this.flagForm;   
+    public changeForm(): void { 
     }
 
 }

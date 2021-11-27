@@ -1,4 +1,4 @@
-<form [formGroup]="registrationForm" (ngSubmit)="submit()">
+<form [formGroup]="registrationForm" (ngSubmit)="submit(userEmail.value, userPwd.value)">
     <div class="form-block">
         <label>email:</label>
         <div 
@@ -61,14 +61,17 @@
         </small>
         </div>
     </div>
-    <div class="form-block">
+    <!-- <div class="form-block">
         <input [disabled]="registrationForm.invalid || submitted" 
                 type="button" 
                 class="btn btnPrimary" 
                 value="Зарегистрироваться" 
-                (click)="authFb.SignUp(userEmail.value, userPwd.value)"
+                (click)="signUp(userEmail.value, userPwd.value)"
         >
-    </div>
+    </div> -->
+    <button [disabled]="registrationForm.invalid || submitted" type="submit" class="btn btnPrimary">
+        Зарегистрироваться
+    </button>
 
 </form>
 

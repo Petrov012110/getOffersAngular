@@ -10,9 +10,10 @@ import { AuthService } from 'src/app/user/shared/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+    public authFlag: boolean = false;
+    
     constructor(
         public authFb: AuthFirebaseService,
-        private _router: Router,
         ) { }
 
     public ngOnInit(): void {
@@ -21,7 +22,7 @@ export class HeaderComponent implements OnInit {
     public logout(event: Event): void {
         event.preventDefault();
         this.authFb.SignOut();
-        this._router.navigate(['/user', 'login']);
+
     }
 
 }
