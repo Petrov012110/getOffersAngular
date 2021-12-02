@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { CacheService } from "./cache.service";
+import { CacheKeys, CacheService } from "./cache.service";
 
 /**
  * Node for to-do item
@@ -37,11 +37,11 @@ export class ChecklistDatabase {
     }
 
     constructor(private _cache: CacheService) {
-        this.getClassificator();
+        this.getClassificatorTree();
     }
 
-    public getClassificator(): void {
-        this._cache.getDataClassificator()
+    public getClassificatorTree(): void {
+        this._cache.getDataCache(CacheKeys.Classificator)
             .subscribe(item => this.initialize(item));
     }
 

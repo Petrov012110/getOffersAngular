@@ -1,1 +1,11 @@
-<p>item-page works!</p>
+<button routerLink="/search" class="btn btn-link">Назад</button>
+<div *ngIf="element">
+    <ul>
+        <li>{{ element.date}}</li>
+        <li>{{ element.name }}</li>
+        <li>{{ element.postLink }}</li>
+        <li>{{ element.seller }}</li>
+        <li>{{ element.storeLinkImg }}</li>
+        <li>{{ element.storeName }}</li>
+    </ul>
+</div>

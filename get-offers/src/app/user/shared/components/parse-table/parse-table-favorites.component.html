@@ -1,0 +1,74 @@
+<div class="parse-table">
+    <div class="parse-table__container">
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="store">
+                    <th mat-header-cell *matHeaderCellDef> Store </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div class="store-block">
+                            <img class="storeLinkImg" src="{{element.storeLinkImg}}" alt="storeLinkImg">
+                            <div class="storeName">
+                                {{element.storeName}}
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="post">
+                    <th mat-header-cell *matHeaderCellDef> post </th>
+                    <td mat-cell *matCellDef="let element">
+                        <a href="{{element.postLink}}">Ссылка на пост</a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef> Price </th>
+                    <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="seller">
+                    <th mat-header-cell *matHeaderCellDef> Seller </th>
+                    <td mat-cell *matCellDef="let element"> {{element.seller}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="page-item">
+                    <th mat-header-cell *matHeaderCellDef> Подробнее </th>
+                    <td mat-cell *matCellDef="let element">
+                        <a [routerLink]="['/item', '118323']" [state]="element">
+                            Open
+                        </a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="delete">
+                    <th mat-header-cell *matHeaderCellDef>  </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button (click)="removeItemFromLocalStorage(element)">
+                            <span class="material-icons-outlined">
+                                bookmark_remove
+                                </span>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons
+                aria-label="Select page of periodic elements">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

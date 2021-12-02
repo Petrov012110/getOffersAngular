@@ -35,8 +35,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { ManagerService } from "./shared/services/manager.service";
 import { CacheService } from "./shared/services/cache.service";
-import { BannerComponent } from "../shared/components/banner/banner.component";
 import { ParseTableComponent } from './shared/components/parse-table/parse-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ParseTableFavoritesComponent } from "./shared/components/parse-table/parse-table-favorites.component";
 
 const imports: any[] = [
     CommonModule,
@@ -49,6 +51,8 @@ const imports: any[] = [
     MatTreeModule,
     MatCheckboxModule,
     MatFormFieldModule,
+    MatTableModule,
+    MatPaginatorModule,
     MatIconModule,
     RouterModule.forChild([
         {
@@ -91,6 +95,7 @@ const declarations: any[] = [
     SingUpPageComponent,
     ResetPasswordPageComponent,
     ItemsTreeComponent,
+    ParseTableFavoritesComponent
 ];
 
 const exports: any[] = [

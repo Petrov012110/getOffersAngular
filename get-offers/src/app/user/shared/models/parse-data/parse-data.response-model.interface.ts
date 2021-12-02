@@ -5,9 +5,11 @@ export interface IParseData {
 
 interface IData {
     price: string,
-    postId: string,
-    text: string,
-    date: number,
+    storeLinkImg: string,
+    storeName: string,
+    seller: string,
+    postLink: string,
+    date: string,
     post: string,
-    hrefImg: string[],
+    hrefImg: string
 }

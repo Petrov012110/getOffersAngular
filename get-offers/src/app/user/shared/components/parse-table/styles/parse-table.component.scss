@@ -1,0 +1,19 @@
+.parse-table {
+  &__container {
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px 20px 20px;
+  }
+}
+
+table {
+  width: 100%;
+}
+.store-block{
+    display: flex;
+}
+.storeLinkImg {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}

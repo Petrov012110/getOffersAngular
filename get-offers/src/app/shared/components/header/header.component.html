@@ -29,7 +29,7 @@
     </div>
     <div class="header-wrapp__bside">
         <div class="header-navigation">
-            <ng-container *ngIf="authFlag">
+            <ng-container *ngIf="!authFlag">
                 <ul>
                     <li routerLinkActive="active">
                         <a [routerLink]="['/user', 'search']">Поиск</a>
@@ -42,7 +42,7 @@
                     </li>
                 </ul>
             </ng-container>
-            <ng-container *ngIf="!authFlag">
+            <ng-container *ngIf="authFlag">
                 <ul>
                     <li routerLinkActive="active">
                         <a mat-icon-button [routerLink]="['/user', 'search']">
