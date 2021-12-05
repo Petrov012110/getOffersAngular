@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthFirebaseService } from 'src/app/user/shared/services/auth-firebase.service';
 import { AuthService } from 'src/app/user/shared/services/auth.service';
+import { ManagerService } from 'src/app/user/shared/services/manager.service';
 
 @Component({
     selector: 'app-header',
@@ -10,18 +11,20 @@ import { AuthService } from 'src/app/user/shared/services/auth.service';
 })
 export class HeaderComponent implements OnInit {
 
+    @Input()
     public authFlag: boolean = false;
     
-    constructor(
-        public authFb: AuthFirebaseService,
-        ) { }
-
+    constructor(private _authFb: AuthFirebaseService, private _managerSub: ManagerService) { 
+    }
+    
     public ngOnInit(): void {
+        this._managerSub.isLogin$.subscribe(value => this.authFlag = value);
+        this.authFlag = this._authFb.isLoggedIn;
     }
 
     public logout(event: Event): void {
         event.preventDefault();
-        this.authFb.SignOut();
+        this._authFb.SignOut();
 
     }
 

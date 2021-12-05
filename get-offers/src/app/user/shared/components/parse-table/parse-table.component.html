@@ -55,9 +55,8 @@
                     <ng-container matColumnDef="favorites">
                         <th mat-header-cell *matHeaderCellDef> Favorites </th>
                         <td mat-cell *matCellDef="let element">
-                            <button (click)="saveItemToLocalStorage(element)">
-                                <span class="material-icons-outlined">
-                                </span>
+                            <button class="btn-favorites" (click)="handleItemLocalStorage(element)">
+                                <mat-icon class="bookmark-icon">{{element.bookmark}}</mat-icon>
                             </button>
                         </td>
                     </ng-container>

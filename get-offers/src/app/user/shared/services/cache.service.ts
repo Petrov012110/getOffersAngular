@@ -14,6 +14,7 @@ export class CacheService implements OnDestroy {
 
     private _unsubscriber$: Subject<void> = new Subject<void>();
     private _instanceCache$ = new Map<string, Observable<any>>();
+    
 
     constructor(private _source: SourceService) {
 
@@ -24,15 +25,6 @@ export class CacheService implements OnDestroy {
         this._unsubscriber$.complete();
     }
 
-    // public getDataClassificator(): Observable<any> {
-
-    //     if (!this._instanceCache$.has(key)) {
-    //         const response = this._source.getClassificator();
-    //         this._instanceCache$.set(key, response);
-    //     }
-
-    //     return this._instanceCache$.get(key) as Observable<any>;
-    // }
 
     public getDataCache(keyCache: CacheKeys): Observable<any> {
         if (!this._instanceCache$.has(keyCache)) {

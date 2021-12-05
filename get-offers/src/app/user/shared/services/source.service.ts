@@ -23,7 +23,7 @@ export class SourceService implements OnDestroy {
         this._unsubscriber$.complete();
     }
 
-    public getParseData(): Observable<any> {
+    public getParseData(): Observable<ParseDataViewModel[]> {
         return this._http.post<any>(`http://localhost:808/api/get_data`, {"groups": [1, 1, 1],"items": [1, 1, 1]})
         .pipe(
             map((response: IParseData[]) => {

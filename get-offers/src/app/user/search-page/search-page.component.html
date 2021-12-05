@@ -1,9 +1,16 @@
 <div class="search-page__wrapp">
     <div class="search-page__components">
         <app-items-tree></app-items-tree>
-        <app-parse-table class="search-page__components-table"></app-parse-table>
-        <div class="search-page__components-button">
-            <button class="search-btn" (click)="startSearch()">Поиск</button>
+        <div class="main-content">
+            <div class="table__container">
+                <div *ngFor="let item of groupsList; let i = index">
+                    <app-groups [group]="item"></app-groups>
+                </div>
+                <div class="main-content__button">
+                    <button class="search-btn" (click)="startSearch()">Поиск</button>
+                </div>
+                <app-parse-table class="main-content__table"></app-parse-table>
+            </div>
         </div>
     </div>
 

@@ -10,18 +10,30 @@ export class LocalStorageService {
     constructor(){
     }
 
-    public saveItem(item: ParseDataViewModel) {
+    public saveItem(item: ParseDataViewModel): void {
         const maxFavoritesLength = 30;
-        const history = JSON.parse(localStorage.getItem('favorites-items') || '[]');
+        const history: Array<ParseDataViewModel> = JSON.parse(localStorage.getItem('favorites-items') || '[]');
         const isFavoritesMax = history.length === maxFavoritesLength;
         const workingHistory = isFavoritesMax ? history.slice(1) : history;
         const updatedFavorites = workingHistory.concat(item);
         localStorage.setItem('favorites-items', JSON.stringify(updatedFavorites));
     }
 
-    public getItems(): Observable<ParseDataViewModel[]> {
-        return of(JSON.parse(localStorage.getItem('favorites-items') || '[]'));
+    public removeItem(item: ParseDataViewModel): void {
+        const history: Array<ParseDataViewModel> = JSON.parse(localStorage.getItem('favorites-items') || '[]');
+        for (let i = 0; i < history.length; i++) {
+            if (JSON.stringify(history[i]) === JSON.stringify(item)) {
+                history.splice(i, 1);
+            }
+        }
+        localStorage.setItem('favorites-items', JSON.stringify(history));
     }
+
+    public getItems(): Observable<ParseDataViewModel[]> {
+        return of<ParseDataViewModel[]>(JSON.parse(localStorage.getItem('favorites-items') || '[]'));
+    }
+
+
 
 
 

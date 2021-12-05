@@ -10,6 +10,7 @@ export class ParseDataViewModel {
     public date!: string;
     public post!: string;
     public hrefImg?: string;
+    public bookmark: string = 'bookmark_border';
 
     constructor(data: IParseData) {
         if (data) {

@@ -1,4 +1,4 @@
-<button routerLink="/search" class="btn btn-link">Назад</button>
+<button [routerLink]="['/user', 'search']" class="btn btn-link">Назад</button>
 <div *ngIf="element">
     <ul>
         <li>{{ element.date}}</li>

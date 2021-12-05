@@ -1,44 +1,42 @@
-import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
+import { MatTreeModule } from '@angular/material/tree';
+import { MatIconModule } from '@angular/material/icon';
+import { AngularFireModule } from "@angular/fire/compat";
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 
+import { AuthService } from "./shared/services/auth.service";
+import { CacheService } from "./shared/services/cache.service";
+import { SourceService } from "./shared/services/source.service";
+import { ManagerService } from "./shared/services/manager.service";
+import { AuthGuardService } from "./shared/services/auth.guard.service";
+import { LocalStorageService } from "./shared/services/local-storage.service";
+import { AuthFirebaseService } from "./shared/services/auth-firebase.service";
+
+import { SharedModule } from "../shared/shared.module";
+import { environment } from "../../environments/environment";
+
+import { ItemPageComponent } from './item-page/item-page.component';
 import { LoginPageComponent } from "./login-page/login-page.component";
 import { SearchPageComponent } from './search-page/search-page.component';
-import { ItemPageComponent } from './item-page/item-page.component';
-import { FavoritesItemPageComponent } from './favorites-item-page/favorites-item-page.component';
-import { UserLayoutComponent } from "./shared/components/user-layout/user-layout.component";
-import { LoginFormComponent } from './shared/components/login-form/login-form.component';
-import { AuthService } from "./shared/services/auth.service";
-import { SharedModule } from "../shared/shared.module";
-import { LocalStorageService } from "./shared/services/local-storage.service";
-import { AuthGuardService } from "./shared/services/auth.guard.service";
-import { RegistrationFormComponent } from './shared/components/registration-form/registration-form.component';
-
-
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { enableIndexedDbPersistence, getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { getStorage, provideStorage } from '@angular/fire/storage';
-import { environment } from "src/environments/environment";
-import { AuthFirebaseService } from "./shared/services/auth-firebase.service";
-import { AngularFireModule } from "@angular/fire/compat";
-import { AngularFireAuthModule } from "@angular/fire/compat/auth";
-import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { SingUpPageComponent } from './sing-up-page/sing-up-page.component';
-import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
-import { ResetPasswordFormComponent } from "./shared/components/reset-password-form/reset-password-form.component";
-import { SourceService } from "./shared/services/source.service";
+import { GroupsComponent } from './shared/components/groups/groups.component';
+import { LoginFormComponent } from './shared/components/login-form/login-form.component';
 import { ItemsTreeComponent } from './shared/components/items-tree/items-tree.component';
-import { MatTreeModule } from '@angular/material/tree';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { ManagerService } from "./shared/services/manager.service";
-import { CacheService } from "./shared/services/cache.service";
+import { UserLayoutComponent } from "./shared/components/user-layout/user-layout.component";
 import { ParseTableComponent } from './shared/components/parse-table/parse-table.component';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { FavoritesItemPageComponent } from './favorites-item-page/favorites-item-page.component';
+import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
+import { RegistrationFormComponent } from './shared/components/registration-form/registration-form.component';
 import { ParseTableFavoritesComponent } from "./shared/components/parse-table/parse-table-favorites.component";
+import { ResetPasswordFormComponent } from "./shared/components/reset-password-form/reset-password-form.component";
 
 const imports: any[] = [
     CommonModule,
@@ -95,7 +93,9 @@ const declarations: any[] = [
     SingUpPageComponent,
     ResetPasswordPageComponent,
     ItemsTreeComponent,
-    ParseTableFavoritesComponent
+    ParseTableFavoritesComponent,
+    ParseTableComponent,
+    GroupsComponent
 ];
 
 const exports: any[] = [
@@ -114,8 +114,7 @@ const providers: any[] = [
 
 @NgModule({
     declarations: [
-        ...declarations,
-        ParseTableComponent
+        ...declarations
     ],
     imports: [
         ...imports

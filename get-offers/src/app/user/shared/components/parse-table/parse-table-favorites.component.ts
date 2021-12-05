@@ -10,20 +10,16 @@ import { ParseTableBaseComponent } from "./parse-table.base.component";
 })
 export class ParseTableFavoritesComponent extends ParseTableBaseComponent implements OnInit {
 
-    constructor(private _localStorage: LocalStorageService) {
-        super();
+    constructor(protected localStorage: LocalStorageService) {
+        super(localStorage);
         this.displayedColumns.push('delete')
     }
 
     public ngOnInit(): void {
-        this._localStorage.getItems()
+        this.localStorage.getItems()
             .subscribe(items => {
                 this.dataSource.data = items;
-            })
-    }
-
-    public removeItemFromLocalStorage(item: ParseDataViewModel): void {
-        
+            });
     }
 
 }
