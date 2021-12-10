@@ -18,8 +18,8 @@ export class HeaderComponent implements OnInit {
     }
     
     public ngOnInit(): void {
-        this._managerSub.isLogin$.subscribe(value => this.authFlag = value);
-        this.authFlag = this._authFb.isLoggedIn;
+        // this._managerSub.isLogin$.subscribe(value => this.authFlag = value);
+        this.authFlag = this.authFlag;
     }
 
     public logout(event: Event): void {

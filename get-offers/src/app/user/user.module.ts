@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { ModuleWithProviders, NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { MatTreeModule } from '@angular/material/tree';
@@ -15,7 +15,6 @@ import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { AuthService } from "./shared/services/auth.service";
 import { CacheService } from "./shared/services/cache.service";
 import { SourceService } from "./shared/services/source.service";
-import { ManagerService } from "./shared/services/manager.service";
 import { AuthGuardService } from "./shared/services/auth.guard.service";
 import { LocalStorageService } from "./shared/services/local-storage.service";
 import { AuthFirebaseService } from "./shared/services/auth-firebase.service";
@@ -106,9 +105,7 @@ const providers: any[] = [
     AuthService,
     LocalStorageService,
     AuthGuardService,
-    AuthFirebaseService,
     SourceService,
-    ManagerService,
     CacheService
 ];
 
@@ -126,7 +123,11 @@ const providers: any[] = [
         ...exports
     ],
 })
-
 export class UserModule {
-
+    public static forRoot(): ModuleWithProviders<UserModule> {
+        return {
+            ngModule: UserModule,
+            providers: [AuthFirebaseService]
+        };
+    }
 }

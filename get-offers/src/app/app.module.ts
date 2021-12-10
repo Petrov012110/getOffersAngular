@@ -13,6 +13,7 @@ import { UserModule } from './user/user.module';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { BannerComponent } from './shared/components/banner/banner.component';
+import { ManagerService } from './user/shared/services/manager.service';
 
 
 const imports: any[] = [
@@ -22,7 +23,7 @@ const imports: any[] = [
     HttpClientModule,
     SharedModule,
     UserModule,
-
+    UserModule.forRoot()
 ];
 
 const declarations: any[] = [
@@ -40,7 +41,7 @@ const declarations: any[] = [
   imports: [
     ...imports
   ],
-  providers: [],
+  providers: [ManagerService],
   bootstrap: [AppComponent]
 })
 

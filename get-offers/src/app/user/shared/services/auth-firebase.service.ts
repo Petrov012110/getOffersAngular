@@ -30,23 +30,24 @@ export class AuthFirebaseService {
             if (user) {
                 this.userData = user;
                 localStorage.setItem('user', JSON.stringify(this.userData));
+                this._managerSub.isLogin$.next(true);
                 // JSON.parse(localStorage.getItem('user') as string);
                 this.router.navigate(['/user', 'search']);
 
             } else {
+                this._managerSub.isLogin$.next(false);
                 localStorage.removeItem('user');
                 // JSON.parse(localStorage.getItem('user') as string);
-
             }
         })
     }
 
     // Sign in with email/password
     public SignIn(email: string, password: string): Promise<void> {
-        this._managerSub.isLogin$.next(true);
         return this.afAuth.signInWithEmailAndPassword(email, password)
             .then((result: any) => {
                 this.SetUserData(result.user);
+                
             }).catch((error) => {
                 window.alert(error.message)
             })
