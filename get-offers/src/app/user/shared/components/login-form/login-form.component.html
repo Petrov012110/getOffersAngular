@@ -1,0 +1,50 @@
+<form [formGroup]="loginForm" (ngSubmit)="submit(userEmail.value, userPassword.value)">
+    <div class="form-block">
+        <label>email:</label>
+        <div 
+            [ngClass]="{invalid: loginForm.get('emailControl')?.touched && loginForm.get('emailControl')?.invalid}"
+            class="form-control"
+        >
+            <input type="email" formControlName="emailControl" placeholder="Email" #userEmail >
+            <div
+                *ngIf="loginForm.get('emailControl')?.touched && loginForm.get('emailControl')?.invalid"
+                class="validation"
+            >
+                <small *ngIf="loginForm.get('emailControl')?.errors?.required">
+                    Введите email
+                </small>
+                <small *ngIf="loginForm.get('emailControl')?.errors?.email">
+                    Неверный формат
+                </small>
+            </div>
+        </div>
+    </div>
+    <div class="form-block">
+        <label>password:</label>
+        <div
+            [ngClass]="{invalid: loginForm.get('passwordControl')?.touched && loginForm.get('passwordControl')?.invalid}" 
+            class="form-control"
+        >
+            <input type="password" formControlName="passwordControl" placeholder="Password" #userPassword >
+            <div 
+                *ngIf="loginForm.get('passwordControl')?.touched && loginForm.get('passwordControl')?.invalid"
+                class="validation"
+            >
+            <small *ngIf="loginForm.get('passwordControl')?.errors?.required">
+                Введите пароль
+            </small>
+            <small *ngIf="loginForm.get('passwordControl')?.errors?.minlength">
+                Минимальная длина 
+                {{loginForm.get('passwordControl')?.errors?.minlength.requiredLength}}
+                символов
+            </small>
+            </div>
+        </div>
+    </div>
+
+    <button [disabled]="loginForm.invalid || submitted" type="submit" class="btn btnPrimary">
+        Войти
+    </button>
+
+</form>
+

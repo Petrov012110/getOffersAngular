@@ -1,0 +1,79 @@
+<form [formGroup]="registrationForm" (ngSubmit)="submit(userEmail.value, userPwd.value)">
+    <div class="form-block">
+        <label>email:</label>
+        <div 
+            [ngClass]="{invalid: registrationForm.get('emailControl')?.touched && registrationForm.get('emailControl')?.invalid}"
+            class="form-control"
+        >
+            <input type="email" placeholder="Email" formControlName="emailControl" #userEmail>
+            <div
+                *ngIf="registrationForm.get('emailControl')?.touched && registrationForm.get('emailControl')?.invalid"
+                class="validation"
+            >
+                <small *ngIf="registrationForm.get('emailControl')?.errors?.required">
+                    Введите email
+                </small>
+                <small *ngIf="registrationForm.get('emailControl')?.errors?.email">
+                    Неверный формат
+                </small>
+            </div>
+        </div>
+    </div>
+    <div class="form-block">
+        <label>password:</label>
+        <div
+            [ngClass]="{invalid: registrationForm.get('passwordControl')?.touched && registrationForm.get('passwordControl')?.invalid}" 
+            class="form-control"
+        >
+            <input type="password" placeholder="Password" formControlName="passwordControl" #userPwd>
+            <div 
+                *ngIf="registrationForm.get('passwordControl')?.touched && registrationForm.get('passwordControl')?.invalid"
+                class="validation"
+            >
+            <small *ngIf="registrationForm.get('passwordControl')?.errors?.required">
+                Введите пароль
+            </small>
+            <small *ngIf="registrationForm.get('passwordControl')?.errors?.minlength">
+                Минимальная длина 
+                {{registrationForm.get('passwordControl')?.errors?.minlength.requiredLength}}
+                символов
+            </small>
+            </div>
+        </div>
+    </div>
+    <div class="form-block">
+        <label>confirm password:</label>
+        <div
+            [ngClass]="{invalid: registrationForm.get('confirmPasswordControl')?.touched && registrationForm.get('confirmPasswordControl')?.invalid}" 
+            class="form-control"
+        >
+            <input type="password" placeholder="Password" formControlName="confirmPasswordControl" >
+            <div 
+                *ngIf="registrationForm.get('confirmPasswordControl')?.touched && registrationForm.get('confirmPasswordControl')?.invalid"
+                class="validation"
+            >
+            <small *ngIf="registrationForm.get('confirmPasswordControl')?.errors?.required">
+                Введите пароль
+            </small>
+        </div>
+        <small *ngIf="registrationForm.errors?.notSame && (registrationForm.get('confirmPasswordControl')?.dirty) && registrationForm.get('confirmPasswordControl')?.value">
+            Пароли различаются
+        </small>
+        </div>
+    </div>
+    <!-- <div class="form-block">
+        <input [disabled]="registrationForm.invalid || submitted" 
+                type="button" 
+                class="btn btnPrimary" 
+                value="Зарегистрироваться" 
+                (click)="signUp(userEmail.value, userPwd.value)"
+        >
+    </div> -->
+    <button [disabled]="registrationForm.invalid || submitted" type="submit" class="btn btnPrimary">
+        Зарегистрироваться
+    </button>
+
+</form>
+
+
+
